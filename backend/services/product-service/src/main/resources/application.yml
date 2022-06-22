@@ -1,0 +1,16 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ndex
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+env:
+  pdf-gen:
+    pdfDir: D:\software project\backend\services\reports\
+    reportFileNameDateFormat: dd_MM_yyyy
+    localDateFormat: "dd MMMM yyyy HH:mm:ss"
+    logoImgPath: D:/img_JTO_logo.jpg
+    logoImgScale: 10,10
