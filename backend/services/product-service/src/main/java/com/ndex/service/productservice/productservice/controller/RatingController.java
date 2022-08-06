@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+@CrossOrigin(value = "*")
 @RestController
 @RequestMapping("/rating")
 @Slf4j
@@ -32,4 +32,11 @@ public class RatingController {
         log.info("HIT-/rating | GET | productId : {}", productId);
         return ratingService.getRatingByProductId(productId);
     }
+
+    @GetMapping("/review/{productId}")
+    public ResponseEntity<Object> getReviews(@PathVariable String productId){
+        log.info("HIT-/rating/review | GET | productId : {}", productId);
+        return ratingService.getReviews(productId);
+    }
+
 }

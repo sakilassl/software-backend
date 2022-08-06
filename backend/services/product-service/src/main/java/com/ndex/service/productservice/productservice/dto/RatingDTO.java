@@ -6,16 +6,8 @@ public class RatingDTO {
     private String productId;
     private String description;
     private int ratingValue;
-    private String ratingId;
     private String sid;
 
-    public String getRatingId() {
-        return ratingId;
-    }
-
-    public void setRatingId(String ratingId) {
-        this.ratingId = ratingId;
-    }
 
     public String getSid() {
         return sid;
@@ -52,7 +44,6 @@ public class RatingDTO {
     public RatingModel getModel() {
         RatingModel model = new RatingModel();
         model.setDescription(this.description);
-        model.setRatingId(this.ratingId);
         model.setRatingValue(this.ratingValue);
         model.setSID(this.sid);
         model.setProductId(this.productId);

@@ -6,12 +6,12 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.ndex.service.productservice.productservice.config.PDFGenerator;
 import com.ndex.service.productservice.productservice.models.ProductModel;
-import com.ndex.service.productservice.productservice.models.RatingModel;
 import com.ndex.service.productservice.productservice.repository.ProductRepository;
+import com.ndex.service.productservice.productservice.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -24,30 +24,35 @@ public class ProductPdf {
     private ProductRepository eRepo;
     @Autowired
     private PDFGenerator pdfGenerator;
+    @Autowired
+    private FileUploadService fileUploadService;
 
 
     private static Font COURIER = new Font(Font.FontFamily.COURIER, 20, Font.BOLD);
     private static Font COURIER_SMALL = new Font(Font.FontFamily.COURIER, 16, Font.BOLD);
     private static Font COURIER_SMALL_FOOTER = new Font(Font.FontFamily.COURIER, 12, Font.BOLD);
 
-    public void generatePdfReport() {
+    public String generatePdfReport() throws IOException {
 
         Document document = new Document();
         int noOfColumns = 3;
+        File tempFile = new File(getPdfNameWithDate());
         try {
-            PdfWriter.getInstance(document, new FileOutputStream(getPdfNameWithDate()));
+            FileOutputStream fos = new FileOutputStream(tempFile);
+            PdfWriter.getInstance(document, fos);
             document.open();
             addLogo(document);
             addDocTitle(document);
             createTable(document, noOfColumns);
             addFooter(document);
             document.close();
-            System.out.println("------------------Your PDF Report is ready!-------------------------");
+            fos.close();
 
-        } catch (FileNotFoundException | DocumentException e) {
+        } catch (DocumentException | IOException e) {
             e.printStackTrace();
         }
-
+        String url = fileUploadService.upload(tempFile);
+        return tempFile.delete() ? url : "not found";
     }
 
     private void addLogo(Document document) {

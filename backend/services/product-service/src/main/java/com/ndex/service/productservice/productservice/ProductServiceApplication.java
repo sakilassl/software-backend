@@ -9,17 +9,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import java.io.IOException;
+
+
 @SpringBootApplication
 public class ProductServiceApplication {
 
-    public static void main(String[] args) {
-        ApplicationContext ac =  SpringApplication.run(ProductServiceApplication.class, args);
-        RatingPdf ratingPdf = ac.getBean("rating-pdf",RatingPdf.class);
-        ProductPdf productPdf = ac.getBean("product-pdf",ProductPdf.class);
+    public static void main(String[] args) throws IOException {
+        ApplicationContext ac =  SpringApplication.run(ProductServiceApplication.class, args);;
         UserPdf userPdf =ac.getBean("user-pdf",UserPdf.class);
         TransactionsPdf transactionsPdf = ac.getBean("transactions-pdf",TransactionsPdf.class);
-        ratingPdf.generatePdfReport();
-        productPdf.generatePdfReport();
         userPdf.generatePdfReport();
         transactionsPdf.generatePdfReport();
     }

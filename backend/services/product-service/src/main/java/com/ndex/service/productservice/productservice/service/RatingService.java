@@ -8,4 +8,8 @@ public interface RatingService {
     RatingModel addRating(RatingDTO body);
 
     ResponseEntity<Object> getRatingByProductId(String productId);
+
+    ResponseEntity<Object> getRatingReport();
+
+    ResponseEntity<Object> getReviews(String productId);
 }

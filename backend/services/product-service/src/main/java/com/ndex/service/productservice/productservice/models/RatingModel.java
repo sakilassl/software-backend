@@ -1,18 +1,21 @@
 package com.ndex.service.productservice.productservice.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 
 @Entity(name = "rating")
 public class RatingModel {
 
-    @Id
+    
 //    @GeneratedValue(generator = "uuid2")
 //    @GenericGenerator(name = "uuid2", strategy = "uuid2")
 //    @Type(type = "uuid-char")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="rating_id")
-    private String ratingId;
+    private Integer ratingId;
     @Column(name = "descript")
     private String description;
     @Column(name = "rating_value")
@@ -22,11 +25,11 @@ public class RatingModel {
     @Column(name = "product_id")
     private String productId;
 
-    public String getRatingId() {
+    public Integer getRatingId() {
         return ratingId;
     }
 
-    public void setRatingId(String ratingId) {
+    public void setRatingId(Integer ratingId) {
         this.ratingId = ratingId;
     }
 

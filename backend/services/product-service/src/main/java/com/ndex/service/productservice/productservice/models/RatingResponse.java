@@ -8,4 +8,5 @@ import lombok.Data;
 public class RatingResponse {
     private String productId;
     private int meanRatingValue;
+
 }
